@@ -6,12 +6,20 @@ import { Providers } from "@/app/providers";
 import { cn } from "@/lib/utils";
 
 import "./globals.css";
+import type { Metadata } from "next";
 
 export const runtime = "edge";
 
 const BODY_PADDING = "px-4 sm:px-6";
 
 const inter = Inter({ subsets: ["latin"] });
+
+export const metadata: Metadata = {
+  title: "package peek",
+  description:
+    "Search and discover GitHub repositories based on the specific dependencies listed in their package.json file",
+  robots: "index, follow",
+};
 
 export default function RootLayout({
   children,
