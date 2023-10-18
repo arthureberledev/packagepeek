@@ -37,7 +37,7 @@ export default function RootLayout({
 
           <div className="flex flex-row flex-nowrap gap-x-1.5 items-center">
             <Link
-              href="https://github.com/pondorasti/emojis"
+              href="https://github.com/arthureberledev/packagepeek"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center"
