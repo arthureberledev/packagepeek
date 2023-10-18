@@ -22,7 +22,7 @@
   <a href="#credits"><strong>Credits</strong></a> ·
 </p>
 
-![packagepeek-dashboard](https://github.com/arthureberledev/packagepeek/assets/58264696/9f33d95c-ad11-471a-90f3-baf5a8227871)
+![packagepeek-dashboard](https://github.com/arthureberledev/packagepeek/assets/58264696/81b185a8-44a5-40b7-9ece-f276e3f9d69a)
 
 <br/>
 
