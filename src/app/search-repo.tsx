@@ -58,7 +58,7 @@ export function SearchRepo({ searchReposAction }: SearchRepo) {
         <input
           type="text"
           name="dependencies"
-          placeholder="next @supabase/supabase-js @uppy/core"
+          placeholder="@supabase/supabase-js @uppy/core"
           className="bg-transparent text-white placeholder:text-stone-400 ring-0 outline-none resize-none py-2.5 px-2 font-mono text-sm h-10 w-full transition-all duration-300"
         />
 
