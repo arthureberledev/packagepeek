@@ -2,22 +2,24 @@ import { BoxesIcon, GithubIcon } from "lucide-react";
 import { Inter } from "next/font/google";
 import Link from "next/link";
 
-import { Providers } from "@/app/providers";
 import { cn } from "@/lib/utils";
 
+import { Toaster } from "sonner";
 import "./globals.css";
+
 import type { Metadata } from "next";
 
 export const runtime = "edge";
+export const dynamic = "force-dynamic";
 
 const BODY_PADDING = "px-4 sm:px-6";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "package peek",
+  title: "package peek | Find Repositories Quickly",
   description:
-    "Search and discover GitHub repositories based on the specific dependencies listed in their package.json file",
+    "Search and discover GitHub repositories based on specific keywords listed in their package.json file",
   robots: "index, follow",
 };
 
@@ -63,12 +65,12 @@ export default function RootLayout({
         >
           <div className="py-[15vh] sm:py-[20vh] flex flex-col items-center justify-center">
             <h1 className="font-medium text-4xl max-w-md text-center text-stone-900 mb-3 animate-in fade-in slide-in-from-bottom-3 duration-1000 ease-in-out">
-              Search Repositories
+              Find Repositories Quickly
             </h1>
 
             <p className="text-gray-500 mb-8 text-base animate-in max-w-lg text-center fade-in slide-in-from-bottom-4 duration-1200 ease-in-out">
-              Search and discover GitHub repositories based on the specific
-              dependencies listed in their package.json file
+              Search and discover GitHub repositories based on specific keywords
+              listed in their package.json file
             </p>
 
             <div className="max-w-md space-y-4 w-full animate-in fade-in slide-in-from-bottom-4 duration-1200 ease-in-out">
@@ -76,7 +78,8 @@ export default function RootLayout({
             </div>
           </div>
         </main>
-        <Providers />
+
+        <Toaster position="top-center" />
       </body>
     </html>
   );

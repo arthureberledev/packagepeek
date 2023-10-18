@@ -3,21 +3,23 @@
 import { z } from "zod";
 
 import { action } from "@/lib/safe-action";
+
 import type { Octokit } from "@octokit/rest";
 
 const schema = z.object({
   query: z.string(),
 });
 
-export const searchRepositories = action(schema, async ({ query }) => {
+export const searchReposAction = action(schema, async ({ query }) => {
   try {
-    const q = query + " filename:package.json";
+    // https://docs.github.com/en/search-github/github-code-search/understanding-github-code-search-syntax
+    const q = query + ' filename:"package.json"';
     const response = await fetch(
       `https://api.github.com/search/code?q=${encodeURIComponent(q)}`,
       {
         method: "GET",
         headers: {
-          Accept: "application/vnd.github+json",
+          Accept: "application/vnd.github.text-match+json",
           Authorization: `token ${process.env.GITHUB_API_TOKEN}`,
         },
       }
@@ -36,12 +38,22 @@ export const searchRepositories = action(schema, async ({ query }) => {
       ReturnType<Octokit["search"]["code"]>
     >["data"];
 
-    const repositories = data.items.map((item) => item.repository);
-    const uniqueRepositories = repositories.filter(
-      (repo, index, self) => index === self.findIndex((t) => t.id === repo.id)
-    );
+    const repositories = data.items.map((repo) => {
+      const matchedIndex = repo.text_matches?.[0].matches?.[0].indices?.[0];
+      return {
+        repository: repo.repository,
+        metadata: {
+          package_json_url: repo.html_url,
+          matched_fragment: matchedIndex
+            ? repo.text_matches?.[0].fragment?.substring(
+                matchedIndex - 1 // include the quote
+              )
+            : "",
+        },
+      };
+    });
 
-    return uniqueRepositories;
+    return repositories;
   } catch (error) {
     console.error(error);
     return { error: "Internal Server Error" };

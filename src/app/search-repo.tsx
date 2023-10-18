@@ -9,17 +9,17 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 import { LoaderIcon } from "./loader";
 
-import type { searchRepositories } from "@/app/actions";
+import type { searchReposAction } from "@/app/actions";
 
 interface SearchRepo {
-  searchRepositories: typeof searchRepositories;
+  searchReposAction: typeof searchReposAction;
 }
 
-export function SearchRepo({ searchRepositories }: SearchRepo) {
+export function SearchRepo({ searchReposAction }: SearchRepo) {
   const formRef = React.useRef<React.ElementRef<"form">>(null);
-  const { execute, result, status } = useAction(searchRepositories, {
+
+  const { execute, result, status } = useAction(searchReposAction, {
     onError: (error) => {
-      console.log("🚀 ~ SearchRepo ~ error:", error);
       if (error.serverError) {
         toast.error(error.serverError);
         return;
@@ -78,13 +78,13 @@ export function SearchRepo({ searchRepositories }: SearchRepo) {
 
       {repositories.length > 0 && (
         <ul className="pt-6 flex gap-y-3 flex-col">
-          {repositories.map((repository) => (
-            <li key={repository.id}>
+          {repositories.map(({ repository, metadata }) => (
+            <li key={metadata.package_json_url}>
               <a
                 target="_blank"
                 rel="noopener noreferrer"
-                href={repository.html_url}
-                className="borders shadow-md ring-1 ring-gray-200 hover:-translate-y-0.5 transition-transform duration-150  flex flex-row flex-nowrap py-1 px-1.5 items-center rounded-xl gap-x-2.5 bg-white w-full relative group"
+                href={metadata.package_json_url}
+                className="borders shadow-md ring-1 ring-gray-200 hover:-translate-y-0.5 transition-transform duration-150 flex flex-row  flex-nowrap py-1 px-1.5 items-center rounded-xl gap-x-2.5 bg-white w-full relative group"
               >
                 <Avatar className="w-8 h-8 rounded-[calc(12px-3px)] overflow-hidden">
                   <AvatarImage
@@ -96,16 +96,21 @@ export function SearchRepo({ searchRepositories }: SearchRepo) {
                   </AvatarFallback>
                 </Avatar>
 
-                <p
-                  className="font-mono text-sm truncate"
-                  title={repository.full_name}
-                >
-                  {repository.full_name}
-                </p>
+                <div className="flex flex-col truncate shrink">
+                  <h3
+                    className="font-mono text-sm truncate"
+                    title={repository.full_name}
+                  >
+                    {repository.full_name}
+                  </h3>
+                  <p className="text-xs truncate max-w-xs text-stone-500">
+                    {metadata.matched_fragment}
+                  </p>
+                </div>
 
                 <div
                   className={cn(
-                    "w-8 h-8 aspect-square flex items-center justify-center absolute right-1"
+                    "w-8 h-8 aspect-square ml-auto flex shrink-0 items-center justify-center"
                   )}
                 >
                   <span className="sr-only">Go to repository</span>

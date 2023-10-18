@@ -3,7 +3,7 @@
 </a>
 
 <p align="center">
-  Search and discover GitHub repositories based on the specific dependencies listed in their package.json file.
+  Search and discover GitHub repositories based on specific keywords listed in their package.json file.
 </p>
 
 <p align="center">

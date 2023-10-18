@@ -1,6 +1,6 @@
 import { SearchRepo } from "@/app/search-repo";
-import { searchRepositories } from "./actions";
+import { searchReposAction } from "./actions";
 
 export default function Home() {
-  return <SearchRepo searchRepositories={searchRepositories} />;
+  return <SearchRepo searchReposAction={searchReposAction} />;
 }
