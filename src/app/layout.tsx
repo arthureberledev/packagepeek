@@ -9,9 +9,6 @@ import "./globals.css";
 
 import type { Metadata } from "next";
 
-export const runtime = "edge";
-export const dynamic = "force-dynamic";
-
 const BODY_PADDING = "px-4 sm:px-6";
 
 const inter = Inter({ subsets: ["latin"] });
