@@ -26,10 +26,19 @@
 
 <br/>
 
+## Setting Up
+
+package peek only needs one environment variable to get started: `GITHUB_API_TOKEN`.
+
+I've aquired mine from `GitHub` -> `Settings` -> `Developer Settings` -> `Personal Access Token`
+
+Create a token, copy the `.env.example` file, rename it to `.env.local` and paste in the Token. The app should now be working.
+
 ## Tech Stack
 
 - [Next.js](https://nextjs.org/docs/app) - App Router, Server Actions
 - [Cloudflare](https://www.cloudflare.com/) - Hosting
+- [GitHub API](https://docs.github.com/en/rest?apiVersion=2022-11-28) - External API
 
 ## Authors
 
@@ -37,7 +46,7 @@
 
 ## Credits
 
-- [emojis.sh](https://emojis.sh/) - the layout of this application was inspired by emojis.sh design [@pondorasti](https://twitter.com/pondorasti)
+- [emojis.sh](https://emojis.sh/) - the layout of this application was inspired by emojis.sh, developed by [@pondorasti](https://twitter.com/pondorasti) and [@dylanplayer](https://twitter.com/dylanplayer)
 
 ## Legal
 
